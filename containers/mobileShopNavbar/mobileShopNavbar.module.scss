@@ -1,0 +1,148 @@
+.container {
+  position: sticky;
+  top: 70px;
+  z-index: 10;
+  background: transparent;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  padding: 10px 30px;
+  display: flex;
+  column-gap: 10px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+
+  @media (max-width: 1140px) {
+    padding: 10px;
+    top: 0;
+  }
+
+  .iconBtn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    svg {
+      width: 22px;
+      height: 22px;
+      transition: all 0.2s;
+      color: var(--text-black);
+    }
+    &:hover {
+      svg {
+        color: var(--primary);
+      }
+    }
+  }
+
+  .wrapper {
+    width: 100%;
+
+    .showAllBtn {
+      display: flex;
+      align-items: center;
+      column-gap: 5px;
+
+      .text {
+        font-size: 16px;
+        line-height: 19px;
+        font-weight: 600;
+        color: var(--text-black);
+      }
+
+      svg {
+        width: 16px;
+        height: 16px;
+        color: var(--text-black);
+      }
+    }
+  }
+}
+
+.categorySlide {
+  width: fit-content;
+  margin: 8px 0;
+}
+
+.categoryItem {
+  display: flex;
+  align-items: center;
+  column-gap: 5px;
+  padding: 8px 16px;
+  border-radius: 50px;
+  font-size: 15px;
+  line-height: 1.2;
+  font-weight: 500;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background: transparent;
+  border: 1px solid var(--grey);
+
+  &:global(.active) {
+    background-color: var(--primary);
+    color: white;
+    border-color: var(--primary);
+  }
+
+  &:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+  }
+
+  @media (max-width: 1799px) {
+    padding: 6px 12px;
+    font-size: 14px;
+  }
+}
+
+.loadingContainer {
+  position: sticky;
+  top: 70px;
+  z-index: 10;
+  background: transparent;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  padding: 20px 30px;
+  display: flex;
+  column-gap: 10px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+
+  @media (max-width: 1140px) {
+    padding: 10px;
+    top: 0;
+  }
+
+  .iconBtn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    svg {
+      width: 22px;
+      height: 22px;
+      transition: all 0.2s;
+      color: var(--text-black);
+    }
+    &:hover {
+      svg {
+        color: var(--primary);
+      }
+    }
+  }
+
+  .body {
+    display: flex;
+    align-items: center;
+    column-gap: 5px;
+
+    .item {
+      height: 35px;
+      width: 80px;
+      border-radius: 50px;
+      border: 1px solid var(--grey);
+      background-color: rgba(0, 0, 0, 0.04);
+
+      @media (max-width: 1799px) {
+        height: 28px;
+        width: 70px;
+      }
+    }
+  }
+}
