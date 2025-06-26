@@ -1,0 +1,287 @@
+.wrapper {
+  display: block;
+  width: 100%;
+  border-radius: 15px;
+  overflow: hidden;
+  position: relative;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04),
+              0 4px 8px rgba(0, 0, 0, 0.02);
+  
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.06),
+                0 8px 16px rgba(0, 0, 0, 0.03);
+    
+    .body {
+      background: rgba(255, 255, 255, 0.75);
+      border-color: rgba(255, 255, 255, 0.6);
+      border-bottom-color: rgba(0, 0, 0, 0.08);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08),
+                  inset 0 0 0 1px rgba(255, 255, 255, 0.2);
+
+      &::before {
+        background: linear-gradient(
+          120deg,
+          rgba(255, 255, 255, 0.4) 0%,
+          rgba(255, 255, 255, 0.2) 100%
+        );
+      }
+    }
+
+    [data-theme="dark"] & {
+      .body {
+        background: rgba(45, 45, 60, 0.65);
+        border-color: rgba(255, 255, 255, 0.15);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15),
+                    inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+
+        &::before {
+          background: linear-gradient(
+            120deg,
+            rgba(255, 255, 255, 0.2) 0%,
+            rgba(255, 255, 255, 0.07) 100%
+          );
+        }
+      }
+    }
+  }
+
+  &.closed {
+    .header {
+      .closedText {
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 3;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 100%;
+        color: #fff;
+        line-height: 18px;
+        font-weight: 500;
+      }
+      img {
+        filter: brightness(60%);
+        &:hover {
+          filter: brightness(60%);
+        }
+      }
+    }
+  }
+
+  .header {
+    position: relative;
+    padding-top: 58%;
+    overflow: hidden;
+    
+    img {
+      border-radius: 15px;
+      transition: all 0.2s;
+      &:hover {
+        transform: scale(1.02);
+      }
+    }
+  }
+
+  .badge {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 6px 12px;
+    background-color: var(--primary);
+    border-radius: 20px;
+    z-index: 10;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    
+    svg {
+      color: var(--dark);
+    }
+    
+    span {
+      color: var(--dark);
+      font-size: 14px;
+      font-weight: 500;
+      line-height: 1;
+    }
+  }
+
+  .body {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    margin-top: -20px;
+    background: rgba(255, 255, 255, 0.65);
+    backdrop-filter: blur(12px) saturate(180%);
+    -webkit-backdrop-filter: blur(12px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    border-radius: 6px 6px 15px 15px;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03),
+                0 4px 6px rgba(0, 0, 0, 0.02),
+                inset 0 0 0 1px rgba(255, 255, 255, 0.15);
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(
+        120deg,
+        rgba(255, 255, 255, 0.3) 0%,
+        rgba(255, 255, 255, 0.15) 100%
+      );
+      border-radius: 6px 6px 15px 15px;
+      pointer-events: none;
+    }
+
+    [data-theme="dark"] & {
+      background: rgba(45, 45, 60, 0.55);
+      backdrop-filter: blur(12px) saturate(180%);
+      -webkit-backdrop-filter: blur(12px) saturate(180%);
+      border-color: rgba(255, 255, 255, 0.12);
+      border-bottom-color: rgba(255, 255, 255, 0.15);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08),
+                  inset 0 0 0 1px rgba(255, 255, 255, 0.08);
+
+      &::before {
+        background: linear-gradient(
+          120deg,
+          rgba(255, 255, 255, 0.15) 0%,
+          rgba(255, 255, 255, 0.05) 100%
+        );
+      }
+    }
+
+    @media (max-width: 1139px) {
+      padding: 16px;
+      margin-top: -15px;
+    }
+
+    .content {
+      position: relative;
+      line-height: 17px;
+      letter-spacing: -0.3px;
+      .title {
+        display: flex;
+        align-items: center;
+        column-gap: 5px;
+        margin: 0;
+        margin-bottom: 5px;
+        font-size: 16px;
+        font-weight: 700;
+        color: var(--secondary-black);
+
+        [data-theme="dark"] & {
+          color: var(--white);
+        }
+      }
+      .flex {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .text {
+        margin: 0;
+        font-size: 12px;
+        font-weight: 500;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+        color: var(--secondary-text);
+
+        [data-theme="dark"] & {
+          color: var(--grey-light);
+        }
+      }
+    }
+
+    .rating {
+      border-radius: 50%;
+      width: 30px;
+      height: 30px;
+      background-color: var(--badge-bg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 500;
+
+      [data-theme="dark"] & {
+        background: rgba(var(--primary-rgb), 0.15);
+        color: var(--white);
+      }
+    }
+  }
+}
+
+.dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background-color: #d9d9d9;
+
+  [data-theme="dark"] & {
+    background-color: rgba(255, 255, 255, 0.3);
+  }
+}
+
+[data-theme="dark"] {
+  .badge {
+    background-color: var(--primary);
+    
+    svg, span {
+      color: var(--dark);
+    }
+  }
+}
+
+[dir="rtl"] {
+  .wrapper {
+    .body {
+      .shopLogo {
+        right: 20px;
+        left: auto;
+      }
+    }
+    .footer {
+      .greenDot {
+        right: 0;
+        left: auto;
+      }
+    }
+  }
+  .badge {
+    right: auto;
+    left: 12px;
+  }
+}
+
+.minAmount {
+  margin-top: 8px;
+  font-size: 14px;
+  color: var(--secondary-text);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+
+  [data-theme="dark"] & {
+    color: var(--grey-light);
+  }
+
+  &::before {
+    content: "•";
+    color: var(--primary);
+    font-size: 20px;
+    line-height: 1;
+  }
+}
