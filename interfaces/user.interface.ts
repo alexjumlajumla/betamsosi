@@ -32,6 +32,7 @@ export interface LoginCredentials {
   email?: string;
   phone?: number;
   password: string;
+  firebase_token?: string;
 }
 
 export interface RegisterCredentials extends LoginCredentials {
