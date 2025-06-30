@@ -10,13 +10,15 @@ const uiTypes = {
   "4": dynamic(() => import("containers/layout/footer/v2")),
 };
 
-type Props = {};
+type Props = {
+  onOpenVoiceOrder?: () => void;
+};
 
-export default function Footer({}: Props) {
+export default function Footer({ onOpenVoiceOrder }: Props) {
   const { settings } = useSettings();
 
   const Ui = uiTypes[settings?.ui_type as keyof typeof uiTypes];
   const FooterV1 = uiTypes["1"];
 
-  return !!Ui ? <Ui /> : <FooterV1 />;
+  return !!Ui ? <Ui onOpenVoiceOrder={onOpenVoiceOrder} /> : <FooterV1 onOpenVoiceOrder={onOpenVoiceOrder} />;
 }

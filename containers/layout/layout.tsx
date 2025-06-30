@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import Header from "./header/header";
 import MobileHeader from "./mobileHeader/mobileHeader";
@@ -30,6 +30,9 @@ import createSettings from "utils/createSettings";
 import dayjs from "dayjs";
 import "dayjs/locale/nl";
 import "dayjs/locale/pl";
+import VoiceOrderChat from 'components/VoiceOrderChat';
+import { MicFillIcon } from 'components/icons';
+import cls from './layout.module.scss';
 
 const PushNotification = dynamic(
   () => import("containers/pushNotification/pushNotification"),
@@ -62,6 +65,7 @@ export default function Layout({ children, locale }: LayoutProps) {
   const { isDarkMode, setDirection } = useContext(ThemeContext);
   const router = useRouter();
   const isShopDetailPage = router.pathname.startsWith("/shop/");
+  const [voiceOrderOpen, setVoiceOrderOpen] = useState(false);
 
   useQuery(
     ["translation", locale],
@@ -175,13 +179,14 @@ export default function Layout({ children, locale }: LayoutProps) {
         {isProfileRoute ? (
           <ProfileHeader />
         ) : isDesktop ? (
-          <Header />
+          <Header onOpenVoiceOrder={() => setVoiceOrderOpen(true)} />
         ) : (
-          <MobileHeader isShopDetailPage={isShopDetailPage} />
+          <MobileHeader isShopDetailPage={isShopDetailPage} onOpenVoiceOrder={() => setVoiceOrderOpen(true)} />
         )}
         {children}
         {isAuthenticated && <PushNotification />}
-        <Footer />
+        <Footer onOpenVoiceOrder={() => setVoiceOrderOpen(true)} />
+        <VoiceOrderChat open={voiceOrderOpen} onClose={() => setVoiceOrderOpen(false)} />
       </div>
     </ErrorBoundary>
   );

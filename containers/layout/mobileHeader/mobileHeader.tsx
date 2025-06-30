@@ -8,6 +8,7 @@ import dynamic from "next/dynamic";
 import AddressContainer from "containers/addressContainer/addressContainer";
 import useModal from "hooks/useModal";
 import NotificationStats from "components/notificationStats/notificationStats";
+import MicFillIcon from "remixicon-react/MicFillIcon";
 
 const AppDrawer = dynamic(() => import("components/appDrawer/appDrawer"));
 const MobileSearchContainer = dynamic(
@@ -16,10 +17,12 @@ const MobileSearchContainer = dynamic(
 
 interface MobileHeaderProps {
   isShopDetailPage?: boolean;
+  onOpenVoiceOrder?: () => void;
 }
 
 export default function MobileHeader({
   isShopDetailPage = false,
+  onOpenVoiceOrder,
 }: MobileHeaderProps) {
   const { isDarkMode } = useContext(ThemeContext);
   const [appDrawer, handleOpenAppDrawer, handleCloseAppDrawer] = useModal();
@@ -42,6 +45,9 @@ export default function MobileHeader({
           <AddressContainer />
           <button className={cls.iconBtn} onClick={handleOpenSearchModal}>
             <Search2LineIcon />
+          </button>
+          <button className={cls.iconBtn} onClick={onOpenVoiceOrder} aria-label="Voice Order" style={{ marginLeft: 8 }}>
+            <MicFillIcon size={24} />
           </button>
         </div>
       </div>

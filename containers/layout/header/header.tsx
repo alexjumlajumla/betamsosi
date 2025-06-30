@@ -1,4 +1,4 @@
-import React, { useContext, useRef } from "react";
+import React, { useContext, useRef, useState } from "react";
 import Link from "next/link";
 import cls from "./header.module.scss";
 import { BrandLogo, BrandLogoDark } from "components/icons";
@@ -19,6 +19,7 @@ import SecondaryButton from "components/button/secondaryButton";
 import { useTranslation } from "react-i18next";
 import { useRouter } from "next/router";
 import NotificationStats from "components/notificationStats/notificationStats";
+import { MicFillIcon } from 'components/icons';
 
 const AppDrawer = dynamic(() => import("components/appDrawer/appDrawer"));
 const PopoverContainer = dynamic(() => import("containers/popover/popover"));
@@ -26,7 +27,7 @@ const ProfileDropdown = dynamic(
   () => import("components/profileDropdown/profileDropdown")
 );
 
-export default function Header() {
+export default function Header({ onOpenVoiceOrder }: { onOpenVoiceOrder?: () => void }) {
   const { t } = useTranslation();
   const { push } = useRouter();
   const { isDarkMode, toggleDarkMode } = useContext(ThemeContext);
@@ -78,6 +79,14 @@ export default function Header() {
                 <BankCardLineIcon />
               </button>
               <NotificationStats />
+              <button
+                className={cls.iconBtn}
+                onClick={onOpenVoiceOrder}
+                aria-label="Voice Order"
+                style={{ marginLeft: 8 }}
+              >
+                <MicFillIcon size={24} />
+              </button>
             </div>
             {isAuthenticated ? (
               <ProfileDropdown data={user} />

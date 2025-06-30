@@ -12,9 +12,11 @@ import InstagramLineIcon from "remixicon-react/InstagramLineIcon";
 import { useSettings } from "contexts/settings/settings.context";
 import useLocale from "hooks/useLocale";
 
-type Props = {};
+type Props = {
+  onOpenVoiceOrder?: () => void;
+};
 
-export default function Footer({}: Props) {
+export default function Footer({ onOpenVoiceOrder }: Props) {
   const { t } = useLocale();
   const { isDarkMode } = useContext(ThemeContext);
   const isMobile = useMediaQuery("(max-width:576px)");

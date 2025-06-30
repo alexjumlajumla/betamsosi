@@ -1,0 +1,13 @@
+.micButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  padding: 4px;
+  border-radius: 50%;
+  transition: background 0.2s;
+  &:hover {
+    background: var(--grey);
+  }
+} 

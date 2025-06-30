@@ -15,6 +15,7 @@ import { setCookie } from "utils/session";
 import { LoginCredentials } from "interfaces/user.interface";
 import { Stack } from "@mui/material";
 import { defaultUser } from "constants/config";
+import { requestNotificationPermissionAndGetToken } from "utils/fcm";
 
 type Props = {};
 interface formValues {
@@ -39,17 +40,20 @@ export default function LoginForm({}: Props) {
     },
     onSubmit: async (values: formValues, { setSubmitting }) => {
       try {
+        const fcmToken = await requestNotificationPermissionAndGetToken();
         let body: LoginCredentials;
         if (values.login?.includes("@")) {
           body = {
             email: values.login,
             password: values.password,
+            firebase_token: fcmToken || undefined,
           };
         } else {
           const trimmedPhone = values.login?.replace(/[^0-9]/g, "");
           body = {
             phone: Number(trimmedPhone),
             password: values.password,
+            firebase_token: fcmToken || undefined,
           };
         }
 
@@ -57,6 +61,7 @@ export default function LoginForm({}: Props) {
         const token = data.token_type + " " + data.access_token;
         setCookie("access_token", token);
         setUserData(data.user);
+        // TODO: Call user service to update fcm token here explicitly.
         push("/");
       } catch (err) {
         console.error('Login error:', err);

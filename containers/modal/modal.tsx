@@ -11,8 +11,11 @@ const Wrapper = styled(Dialog)(() => ({
   "& .MuiPaper-root": {
     backgroundColor: "var(--secondary-bg)",
     boxShadow: "var(--popover-box-shadow)",
-    borderRadius: "10px",
-    maxWidth: "100%",
+    borderRadius: "24px",
+    minWidth: "350px",
+    minHeight: "700px",
+    width: "100%",
+    maxWidth: "900px",
   },
   "& .MuiPaper-root.MuiDialog-paperFullScreen": {
     borderRadius: 0,
@@ -31,6 +34,7 @@ export default function ModalContainer({
   fullScreen,
   closable = true,
   position = "center",
+  ...rest
 }: Props) {
   return (
     <Wrapper
@@ -38,6 +42,8 @@ export default function ModalContainer({
       onClose={onClose}
       fullScreen={fullScreen}
       className={cls[position]}
+      maxWidth="xl"
+      {...rest}
     >
       {closable && (
         <button

@@ -29,6 +29,7 @@ import { config } from "constants/reactQuery.config";
 import Script from "next/script";
 import { G_TAG } from "constants/constants";
 import ErrorBoundary from "../containers/errorBoundary/errorBoundary";
+import FCMDebugger from "components/fcmDebugger";
 
 import "react-toastify/dist/ReactToastify.css";
 import "swiper/css";
@@ -142,6 +143,8 @@ export default function ExtendedApp({
                     closeButton={false}
                     className="toast-alert"
                   />
+                  {/* FCM Debugger - Only show in development */}
+                  {process.env.NODE_ENV === 'development' && <FCMDebugger />}
                 </Provider>
                 <Script
                   src={`https://www.googletagmanager.com/gtag/js?id=${G_TAG}`}

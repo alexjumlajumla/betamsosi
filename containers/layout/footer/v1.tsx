@@ -12,9 +12,11 @@ import TwitterFillIcon from "remixicon-react/TwitterFillIcon";
 import InstagramLineIcon from "remixicon-react/InstagramLineIcon";
 import { useSettings } from "contexts/settings/settings.context";
 
-type Props = {};
+type Props = {
+  onOpenVoiceOrder?: () => void;
+};
 
-export default function Footer({}: Props) {
+export default function Footer({ onOpenVoiceOrder }: Props) {
   const { t } = useTranslation();
   const { isDarkMode } = useContext(ThemeContext);
   const isMobile = useMediaQuery("(max-width:576px)");

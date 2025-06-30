@@ -171,3 +171,5 @@ export const VerifiedIcon = () => (
     </g>
   </svg>
 );
+
+export { default as MicFillIcon } from 'remixicon-react/MicFillIcon';
