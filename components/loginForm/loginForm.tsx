@@ -37,30 +37,33 @@ export default function LoginForm({}: Props) {
       login: '', // Initialize with empty string
       password: ''
     },
-    onSubmit: (values: formValues, { setSubmitting }) => {
-      let body: LoginCredentials;
-      if (values.login?.includes("@")) {
-        body = {
-          email: values.login,
-          password: values.password,
-        };
-      } else {
-        const trimmedPhone = values.login?.replace(/[^0-9]/g, "");
-        body = {
-          phone: Number(trimmedPhone),
-          password: values.password,
-        };
+    onSubmit: async (values: formValues, { setSubmitting }) => {
+      try {
+        let body: LoginCredentials;
+        if (values.login?.includes("@")) {
+          body = {
+            email: values.login,
+            password: values.password,
+          };
+        } else {
+          const trimmedPhone = values.login?.replace(/[^0-9]/g, "");
+          body = {
+            phone: Number(trimmedPhone),
+            password: values.password,
+          };
+        }
+
+        const { data } = await authService.login(body);
+        const token = data.token_type + " " + data.access_token;
+        setCookie("access_token", token);
+        setUserData(data.user);
+        push("/");
+      } catch (err) {
+        console.error('Login error:', err);
+        error(t("login.invalid"));
+      } finally {
+        setSubmitting(false);
       }
-      authService
-        .login(body)
-        .then(({ data }) => {
-          const token = data.token_type + " " + data.access_token;
-          setCookie("access_token", token);
-          setUserData(data.user);
-          push("/");
-        })
-        .catch(() => error(t("login.invalid")))
-        .finally(() => setSubmitting(false));
     },
     validate: (values: formValues) => {
       const errors: formValues = {} as formValues;
